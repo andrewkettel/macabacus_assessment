@@ -29,7 +29,7 @@ async def create_task(task: Task):
 
 
 # Update a task
-@router.put("/tasks/{task_id}", response_model=Task)
+@router.patch("/tasks/{task_id}", response_model=Task)
 async def update_task(task_id: str, task: Task):
     t = next((task for task in tasks if task.id == UUID(task_id)), None)
     if not t:
