@@ -3,7 +3,7 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException
 from typing import List
 
-from ..models.task import Task
+from ..models.task import Task, StatusEnum
 
 router = APIRouter()
 
@@ -12,9 +12,13 @@ tasks: List[Task] = []
 
 
 # List all tasks
-@router.get("/tasks")
-async def list_tasks():
-    return [task for task in tasks]
+@router.get("/tasks", response_model=List[Task])
+async def list_tasks(status: StatusEnum | None = None):
+    if status:
+        filtered_tasks_db = [task for task in tasks if task.status == status]
+        return filtered_tasks_db
+    else:
+        return tasks
 
 
 # Create a task
