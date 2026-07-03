@@ -11,6 +11,13 @@ router = APIRouter()
 tasks: List[Task] = []
 
 
+def check_uniqueness(data: List[Task]):
+    ids = [task.id for task in data]
+    if len(ids) != len(set(ids)):
+        return False
+    return True
+
+
 # List all tasks
 @router.get("/tasks", response_model=List[Task])
 async def list_tasks(status: StatusEnum | None = None):
@@ -24,6 +31,8 @@ async def list_tasks(status: StatusEnum | None = None):
 # Create a task
 @router.post("/tasks", response_model=Task)
 async def create_task(task: Task):
+    if not check_uniqueness(tasks + [task]):
+        raise HTTPException(status_code=400, detail="Task id is not unique")
     tasks.append(task)
     return task
 

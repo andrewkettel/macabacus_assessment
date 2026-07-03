@@ -80,3 +80,14 @@ def test_update_task_not_found(test_client):
     )
     assert response.status_code == 404
     assert response.json()["detail"] == f"Task with id {uuid} not found"
+
+
+def test_create_task_unique_id(test_client):
+    task = add_task("Complete the project", StatusEnum.ToDo)
+
+    response = test_client.post(
+        "/tasks",
+        json={"id": str(task.id), "title": "Complete the project", "status": "todo"},
+    )
+    assert response.status_code == 400
+    assert response.json()["detail"] == "Task id is not unique"
