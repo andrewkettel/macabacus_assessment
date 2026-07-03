@@ -35,9 +35,10 @@ Before you start, ensure you have the following installed:
 
 1. Run the unit tests:
    ```sh
+   . .venv/bin/activate
    pytest
    ```
-    or
+    or to run the full lint and test with coverage
    ```sh
    uv run black . && uv run mypy . && uv run ruff check --fix && uv run pytest --cov
    ```
