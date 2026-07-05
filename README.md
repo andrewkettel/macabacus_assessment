@@ -7,38 +7,50 @@ This is a basic FastAPI application that manages tasks using an in-memory list.
 Before you start, ensure you have the following installed:
 
 - Python 3.12 or higher
-- uv (https://docs.astral.sh/uv/)
+- uv (https://docs.astral.sh/uv/), poetry (https://python-poetry.org/), or other python virtual environment manager
 
 ## Cloning the App
 
-1. Clone the repository:
+Clone the repository:
    ```sh
    git clone git@github.com:andrewkettel/macabacus_assessment.git
    cd macabacus_assessment
    ```
 
-## Installing the App with uv
+## Installing the App
 
-1. Create a virtual environment and install dependencies
+Create a virtual environment and install dependencies with uv
    ```sh
    uv sync
+   ```
+or with poetry:
+   ```sh
+   poetry install
    ```
 
 ## Running the App
 
-1. Start the FastAPI Dev server:
+Start the FastAPI Dev server:
    ```sh
    uv run fastapi dev
+   ```
+or with poetry:
+   ```sh
+   poetry run fastapi dev
    ```
 
 ## Running Unit Tests
 
-1. Run the unit tests:
+Run the unit tests:
    ```sh
-   . .venv/bin/activate
-   pytest
+   uv run pytest
    ```
-    or to run the full lint and test with coverage
+or with poetry:
+   ```sh
+   peotry run pytest
+   ```
+   
+or to run the full lint and test with coverage
    ```sh
    uv run black . && uv run mypy . && uv run ruff check --fix && uv run pytest --cov
    ```
