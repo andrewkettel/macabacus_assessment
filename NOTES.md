@@ -1,6 +1,6 @@
 ## Design & trade-offs
 
-# Environment/API/Model Design
+### Environment/API/Model Design
 - Decided to split the models, routers and tests into separate folders to keep things organized if this project was to expand. 
 - I chose to use a uuid4 for the Task id for its uniqueness and ability to be a database id column in most databases, though uuid7 would be better in a database since it is time ordered which makes for a more efficient index.
 - I defaulted the id and created_at fields in the model so they could be ignored in the API layer. This could lead to issues which would be solved with better validation on the model and API but doesn't seem necessary in a quick prototype with no database.
@@ -10,7 +10,7 @@
 - Implemented tests for the main features (API create, update, list, and filter) and a few error states (duplicate id, id not found for update)
 - Skipped implementing other data validation checks as that would more test Pydantic type checking and not code in this project.  I like to see integration tests like this to validate certain parts of underlying libraries to get notified when they change but are not necessary
 
-# Deliberate left out
+### Deliberate left out
 - More robust data validation. The inherent type checking of Pydantic, ability to have the API ignore id and created_at, and custom id uniqueness validation seemed sufficient for a prototype. Data modeling through an ORM is where I would add more data validation.
 - Error responses.  The error responses from FastAPI and Pydantic seemed sufficient for a developer to debug and troubleshoot the API but better messaging would be necessary to send to a Frontend.
 
